@@ -13,20 +13,29 @@ public class Bullets : MonoBehaviour
     //Geschwindigkeit der Bullet
     public float BulletForwardForce;
 
-    
+    //Schoot Sound
+    public AudioClip shootSound;
+
+    private AudioSource source;
+
     GameObject TemporaryBulletHandler;
     Rigidbody TemporaryRigidBody;
 
-    void Start()
+    void Awake()
     {
+
+        source = GetComponent<AudioSource>();
 
     }
 
-    
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+
+            source.PlayOneShot(shootSound);
+
             //Bullet instantiation 
             TemporaryBulletHandler = Instantiate(Bullet, BulletEmitter.transform.position, BulletEmitter.transform.rotation) as GameObject;
             TemporaryRigidBody = TemporaryBulletHandler.GetComponent<Rigidbody>();
